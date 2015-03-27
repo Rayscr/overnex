@@ -1,0 +1,308 @@
+#!/bin/sh
+
+#########################################################
+#						overnex                         #
+#					 hacker toolkit                     #
+#                                                       #
+#		developed by bmendax, 							#
+#						 https://github.com/bmendax/	#
+#														#
+#			The World is Open Source! or not?			#
+#########################################################
+
+red='\033[0;31m'
+NC='\033[0m'
+pp='\033[0;35m'
+white='\033[1;37m'
+dg='\033[1;30m'
+cyon='\033[0;36m'
+dark='\033[1;30m'
+blue='\033[0;34m'
+lgray='\033[0;37m'
+lred='\033[1;31m'
+bold=`tput bold`
+normal=`tput sgr0`
+
+	## check if is root
+
+
+
+banner() {
+	clear
+	sleep 0.1 && echo "${pp}  ==============================================================="
+	sleep 0.1 && echo "                          ${red}${bold} AnarchSecurity${normal}${pp}            "
+	sleep 0.1 && echo "  ==============================================================="
+	sleep 0.1 && echo "    #####   ###  ###   #####  ## ###  ## ###    #####    ##  ##  "
+	sleep 0.1 && echo "   ##   ##   ##  ##   ##   ##  ###    ###  ##  ##   ##    ####   "
+	sleep 0.1 && echo "   ##   ##   ## ##    #######  ##     ##   ##  #######     ##    "
+	sleep 0.1 && echo "   ##   ##    ###     ##       ##     ##   ##  ##         ####   "
+	sleep 0.1 && echo "    #####     ###      #####   ##     ##   ##   #####   ##   ##  "
+	sleep 0.1 && echo "  ===============================================================${NC}"
+ 	sleep 0.1 && echo "${white}             for those who fought and those who fell  ${NC}"
+ 	sleep 0.1 && echo " ${pp} =============================================================== ${NC} "
+ 	sleep 0.1 && echo ""
+ 	sleep 0.1 && main
+}
+
+main() {
+	echo "${cyon} [1] Web Hacking Tools"
+	echo " [2] Frameworks(unavailable)"
+	echo " [3] Network"
+	echo " [4] Password"
+	echo " [5] Check"
+	echo " [h] Help ${NC}"
+	echo ""
+	printf "${dark}overnex $> "
+	read -r tool
+
+	if [ "$tool" = "again" ]; then
+		banner;
+	fi
+	case $tool in
+		ls) clear; echo ""; main ;;
+		1) web ;;
+		2) frame ;;
+		3) nnet ;;
+		4) pass ;;
+		5) check ;;
+		h) help ;;
+		*) echo "Invalid option"; main ;;
+	esac
+}
+
+web() {
+	echo "${cyon}"
+	echo "    [1] xssya"
+	echo "    [2] cmsmap "
+	echo "    [3] wpscan"
+	echo "${NC}"
+	printf "${dark}overnex/web $> "
+	read -r webt
+
+	if [ "$webt" = "back" ]; then
+		clear
+		echo ""
+		main;
+	fi
+	case $webt in
+		ls) clear; echo ""; web ;;
+		1) python web/xssya/xssya.py ;;
+		2) cmsmap ;;
+		3) wpp ;;
+		*) clear; echo "Invalid option"; web ;;
+	esac
+}
+
+cmsmap() {
+	echo "${NC}";
+	python web/cmsmap/cmsmap.py
+	printf "${dark}overnex/web/cmsmap $> "
+	read -r cmscmd
+
+	if [ "$cmscmd" = "back" ]; then
+		web;
+	fi
+
+	echo "${NC}"
+	python web/cmsmap/cmsmap.py $cmscmd
+	
+	clear
+	cmsmap
+
+}
+
+wpp() {
+	echo "${NC}"
+	ruby web/wpscan/wpscan.rb --help
+	printf "${dark}overnex/web/wpscan $> "
+	read -r wpcmd
+
+	if [ "$wpcmd" = "back" ]; then
+		web;
+	fi
+
+	echo "${NC}"
+	ruby web/wpscan/wpscan.rb $wpcmd
+	
+	clear
+	wpp
+}
+
+frame() {
+	echo "${NC}"
+	echo "${red} Option unavailable... yet ${NC}"
+
+	sleep 2
+	banner
+}
+
+nnet() {
+	echo "${cyon}"
+	echo "    [1] 3vilTwinAttacker"
+	echo "    [2] linset"
+	echo "    [3] nmap"
+	echo "${NC}"
+	printf "${dark}overnex/network $> "
+	read -r ncmd
+
+	if [ "$ncmd" = "back" ]; then
+		clear
+		echo ""
+		main;
+	fi
+
+
+	case $ncmd in
+		ls) clear; echo ""; nnet ;;
+		1) eviltwin ;;
+		2) linset ;;
+		3) nmapp ;;
+		*) clear; echo "Invalid option"; nnet ;;
+	esac
+}
+
+eviltwin() {
+	echo "${NC}"
+	sudo python network/eviltwin/3vilTwin.py
+
+	clear
+	nnet
+}
+
+linset() {
+	echo "${NC}"
+	xterm -e sudo network/linset/linset
+
+	clear
+	nnet
+}
+
+nmapp() {
+	echo "${NC}"
+	nmap -h
+
+	printf "${dark}overnex/network/nmap $>"
+	read -r nmapcmd
+
+	if [ "$nmapcmd" = "back" ]; then
+		clear
+		echo ""
+		nnet;
+	fi
+
+	echo "${NC}"
+
+	sudo nmap $nmapcmd
+
+	nnet
+}
+
+pass() {
+	echo "${cyon}"
+	echo "   [1] john the ripper"
+	echo "   [2] patator"
+	echo "${NC} "
+	printf "${dark}overnex/password $>"
+	read -r pcmd
+
+	if [ "$pcmd" = "back" ]; then
+		clear
+		echo ""
+		main;
+	fi
+
+	case $pcmd in
+		ls) clear; echo ""; pass ;;
+		1) johntr ;;
+		2) patator ;;
+		*) clear; echo "Invalid option"; pass ;;
+	esac
+
+}
+
+johntr() {
+	echo "${NC}"
+	john
+
+	printf "${dark}overnex/password/john $>"
+	read -r johncmd
+
+	if [ "$johncmd" = "back" ]; then
+		clear
+		echo ""
+		pass;
+	fi
+
+	echo "${NC}"
+	sudo john $johncmd
+
+	pass
+}
+
+patator() {
+	echo "${NC}"
+	sudo python password/patator/patator.py
+
+	printf "${dark}overnex/password/patator $>"
+	read -r patcmd
+
+	if [ "$patcmd" = "back" ]; then
+		clear
+		echo ""
+		pass;
+	fi
+	echo "${NC}"
+	sudo python password/patator/patator.py $patcmd
+
+	pass
+}
+
+help() {
+	echo ""
+	echo "${white}Welcome to Help Menu! "
+	echo "     Developer by ${blue}${bold}bmendax${normal}${NC} "
+	echo "${white}Usage:"
+	echo "      run ./overnex"
+	echo "      choose a option and type it number"
+	echo "      use 'ls' command to list all tools availables at that section"
+	echo "      use 'back' command to get back to previous menu"
+	echo "      be free to use and abuse!"
+	echo ""
+	echo "                            overnex - 2015"
+
+	main
+}
+
+check() {
+	echo ""
+	echo "${cyon} [!]Installing tools, please wait :-) "
+								#web
+	sleep 0.5 && xterm -e git clone git@github.com:yehia-mamdouh/XSSYA-V-2.0.git web/xssya
+	sleep 0.5 && xterm -e git clone https://github.com/Dionach/CMSmap.git web/cmsmap
+	sleep 0.5 && xterm -e git clone git@github.com:rubygems/rubygems.git apt/rubygems
+	sleep 0.5 && xterm -e git clone git@github.com:wpscanteam/wpscan.git web/wpscan
+								#network tools
+	sleep 0.5 && xterm -e git clone git@github.com:P0cL4bs/3vilTwinAttacker.git network/eviltwin
+	sleep 0.5 && xterm -e git clone git@github.com:vk496/linset.git network/linset
+								#password
+	sleep 0.5 && xterm -e git clone git@github.com:lanjelot/patator.git password/patator
+
+	echo ""
+	echo "Wait a little bit more :P"
+	echo ""
+	
+	sleep 0.5 && sudo chmod +x web/xssya/xssya.py
+	sleep 0.5 && sudo apt-get install ruby-full && sudo gem install bundler && xterm -e bundle install && sudo apt-get install curl
+								#network tools
+	sleep 0.5 && sudo chmod +x network/linset/linset
+	sleep 0.5 && sudo apt-get install nmap
+								#password
+	sleep 0.5 && sudo apt-get install john
+
+	echo ""
+
+banner
+}
+
+
+banner

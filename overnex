@@ -299,14 +299,14 @@ check() {
 	sleep 0.5 && xterm -e git clone git@github.com:lanjelot/patator.git password/patator
 	echo "[!] patator installed"
 
-	echo ""
+
 	echo "Wait a little bit more :P"
-	echo ""
+
 	
 	sleep 0.5 && sudo chmod +x web/xssya/xssya.py
 	sleep 0.5 && sudo apt-get install ruby-full && sudo gem install bundler && bundle install
 	echo "[!] ruby installed and configured"
-	
+
 	sudo apt-get install curl
 	echo "[!] curl installed"
 

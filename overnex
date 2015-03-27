@@ -278,26 +278,45 @@ check() {
 	echo "${cyon} [!]Installing tools, please wait :-) "
 								#web
 	sleep 0.5 && xterm -e git clone git@github.com:yehia-mamdouh/XSSYA-V-2.0.git web/xssya
+	echo "[!] xssya installed"
+
 	sleep 0.5 && xterm -e git clone https://github.com/Dionach/CMSmap.git web/cmsmap
+	echo "[!] cmsmap installed"
+
 	sleep 0.5 && xterm -e git clone git@github.com:rubygems/rubygems.git apt/rubygems
+	echo "[!] rubygems installed"
+
 	sleep 0.5 && xterm -e git clone git@github.com:wpscanteam/wpscan.git web/wpscan
+	echo "[!] wpscan installed"
+
 								#network tools
 	sleep 0.5 && xterm -e git clone git@github.com:P0cL4bs/3vilTwinAttacker.git network/eviltwin
+	echo "[!] 3vilTwinAttacker installed"
+
 	sleep 0.5 && xterm -e git clone git@github.com:vk496/linset.git network/linset
+	echo "[!] linset installed"
 								#password
 	sleep 0.5 && xterm -e git clone git@github.com:lanjelot/patator.git password/patator
+	echo "[!] patator installed"
 
 	echo ""
 	echo "Wait a little bit more :P"
 	echo ""
 	
 	sleep 0.5 && sudo chmod +x web/xssya/xssya.py
-	sleep 0.5 && sudo apt-get install ruby-full && sudo gem install bundler && xterm -e bundle install && sudo apt-get install curl
+	sleep 0.5 && sudo apt-get install ruby-full && sudo gem install bundler && bundle install
+	echo "[!] ruby installed and configured"
+	
+	sudo apt-get install curl
+	echo "[!] curl installed"
+
 								#network tools
 	sleep 0.5 && sudo chmod +x network/linset/linset
 	sleep 0.5 && sudo apt-get install nmap
+	echo "[!] nmap installed"
 								#password
 	sleep 0.5 && sudo apt-get install john
+	echo "[!] john the ripper installed"
 
 	echo ""
 
